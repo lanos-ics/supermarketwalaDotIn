@@ -15,7 +15,7 @@ public class GlobalExceptionHandler {
 	
 //	private final Logger logger = (Logger) org.slf4j.LoggerFactory.getLogger(getClass());
 	
-	@ExceptionHandler(NotFoundException.class)
+	@ExceptionHandler
 	public ResponseEntity<ErrorResponse> handleNotFound(NotFoundException ex, HttpServletRequest req )
 	{
 		// using record : 
@@ -31,4 +31,7 @@ public class GlobalExceptionHandler {
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(body);
 	}
 
+	
+	
+	
 }

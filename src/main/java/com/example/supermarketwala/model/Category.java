@@ -19,6 +19,23 @@ public class Category {
 	public Long getCategoryId() {
 		return categoryId;
 	}
+	
+	
+	
+	public Category() {
+		super();
+	}
+
+
+
+	public Category(Long categoryId, String categoryName) {
+		super();
+		this.categoryId = categoryId;
+		this.categoryName = categoryName;
+	}
+
+
+
 	public void setCategoryId(Long categoryId) {
 		this.categoryId = categoryId;
 	}

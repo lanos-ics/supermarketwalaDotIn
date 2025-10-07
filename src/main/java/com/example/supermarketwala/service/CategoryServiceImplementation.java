@@ -42,13 +42,26 @@ public class CategoryServiceImplementation implements CategoryService {
 	@Override
 	public Category getCategory(Long categoryId) {
 		// TODO Auto-generated method stub
-		return null;
+		Optional<Category> category =  categoryRepository.findById(categoryId);
+		return category.orElseThrow(() -> new NotFoundException("Category not found."));
 	}
 
 	@Override
 	public String updateCategory(Long categoryId, Category category) {
 		// TODO Auto-generated method stub
-		return null;
+		
+		Optional<Category> existingCategory =  categoryRepository.findById(categoryId);
+		
+		if(existingCategory.isPresent())
+		{
+			Category c = existingCategory.get();
+			c.setCategoryName(category.getCategoryName());
+			categoryRepository.save(c);
+			
+		}
+		return "Category Updated Sucessfully!";
+		
+		
 	}
 
 	@Override

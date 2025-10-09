@@ -45,26 +45,26 @@ public class CategoryController {
 	
 	
 	@PostMapping("/categories")
-	ResponseEntity<String> addCategory(@RequestBody Category category)
+	ResponseEntity<Category> addCategory(@RequestBody Category category)
 	{
-		String message = categoryService.addCategory(category);
-		return ResponseEntity.accepted().body(message);
+		Category categoryAdded = categoryService.addCategory(category);
+		return ResponseEntity.accepted().body(categoryAdded);
 		
 	}
 	
 	@DeleteMapping("/categories/d/{catId}")
-	ResponseEntity<String> removeCategory(@PathVariable("catId") Long categoryId)
+	ResponseEntity<Category> removeCategory(@PathVariable("catId") Long categoryId)
 	{
 		
-		String message = categoryService.deleteCategory(categoryId);
-		return ResponseEntity.ok().body(message);
+		Category deletedCategory = categoryService.deleteCategory(categoryId);
+		return ResponseEntity.ok().body(deletedCategory);
 	}
 	
 	@PutMapping("/categories/u/{categoryId}")
-	ResponseEntity<String> updateCategory(@PathVariable("categoryId") Long categoryId, @RequestBody Category category)
+	ResponseEntity<Category> updateCategory(@PathVariable("categoryId") Long categoryId, @RequestBody Category category)
 	{
-		String message = categoryService.updateCategory(categoryId, category);
-		return ResponseEntity.ok().body(message);
+		Category updatedCategory = categoryService.updateCategory(categoryId, category);
+		return ResponseEntity.ok().body(updatedCategory);
 	}
 	
 	

@@ -24,20 +24,12 @@ public class CategoryServiceImplementation implements CategoryService {
 	}
 
 	@Override
-	public String addCategory(Category category) {
+	public Category addCategory(Category category) {
 		// TODO Auto-generated method stub
 		
 		categoryRepository.save(category);
-		return "Category with id :" + category.getCategoryId() + " Added Sucessfuly.";
+		return category;
 	}
-
-//	@Override
-//	public String deleteCategory(Long categoryId) {
-////		Long id = Long.valueOf(categoryId);
-//		Category categoryToBeRemoved = findByIdOrThrow(categoryId);
-//		categories.remove(categoryToBeRemoved);
-//		return "Category Deleted sucessfully!";
-//	}
 
 	@Override
 	public Category getCategory(Long categoryId) {
@@ -47,7 +39,7 @@ public class CategoryServiceImplementation implements CategoryService {
 	}
 
 	@Override
-	public String updateCategory(Long categoryId, Category category) {
+	public Category updateCategory(Long categoryId, Category category) {
 		// TODO Auto-generated method stub
 		
 		Optional<Category> existingCategory =  categoryRepository.findById(categoryId);
@@ -57,17 +49,31 @@ public class CategoryServiceImplementation implements CategoryService {
 			Category c = existingCategory.get();
 			c.setCategoryName(category.getCategoryName());
 			categoryRepository.save(c);
-			
+			return c;
+		}else
+		{
+			throw new NotFoundException("category not found");
 		}
-		return "Category Updated Sucessfully!";
 		
 		
 	}
 
 	@Override
-	public String deleteCategory(Long categoryId) {
-		// TODO Auto-generated method stub
-		return null;
+	public Category deleteCategory(Long categoryId) {
+		Optional<Category> existingCategory =  categoryRepository.findById(categoryId);
+		
+		if(existingCategory.isPresent())
+		{
+			Category c = existingCategory.get();
+			
+			categoryRepository.delete(c);
+			return c;
+		}
+		else
+		{
+			throw new NotFoundException("category not found");
+		}
+		
 	}
 
 //	@Override
@@ -100,9 +106,7 @@ public class CategoryServiceImplementation implements CategoryService {
 //		 new NotFoundException(" Category with id" + id + " not Found!"));
 //		 
 //	 }
-//	
-//	 
-	 
+ 
 	 
 	 
 	 

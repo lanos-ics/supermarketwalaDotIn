@@ -16,12 +16,12 @@ public interface CategoryService {
 	 
 	// add category 
 	
-	public String addCategory(Category category);
+	public Category addCategory(Category category);
 	
 	// delete category 
 	
-	public String deleteCategory(Long categoryId);
+	public Category deleteCategory(Long categoryId);
 	
 	// update category 
-	public String updateCategory(Long categoryId, Category category);
+	public Category updateCategory(Long categoryId, Category category);
 }

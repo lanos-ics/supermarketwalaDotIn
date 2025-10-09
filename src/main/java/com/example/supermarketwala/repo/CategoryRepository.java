@@ -8,4 +8,5 @@ import com.example.supermarketwala.model.Category;
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Long>{
 	// bhavishya ke liye khaali jagah : 
+	
 }

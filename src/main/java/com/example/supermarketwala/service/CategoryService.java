@@ -2,6 +2,8 @@ package com.example.supermarketwala.service;
 
 import java.util.List;
 
+import com.example.supermarketwala.dto.CategoryDTO;
+import com.example.supermarketwala.dto.CategoryResponse;
 import com.example.supermarketwala.model.Category;
 
 public interface CategoryService {
@@ -10,18 +12,18 @@ public interface CategoryService {
 
 	// get category 
 	
-	public List<Category> getCategories();
+	public CategoryResponse getCategories();
 	
 	public Category getCategory(Long categoryId);
 	 
 	// add category 
 	
-	public Category addCategory(Category category);
+	public CategoryDTO addCategory(CategoryDTO categoryDTO);
 	
 	// delete category 
 	
-	public Category deleteCategory(Long categoryId);
+	public CategoryDTO deleteCategory(Long categoryId);
 	
 	// update category 
-	public Category updateCategory(Long categoryId, Category category);
+	public CategoryDTO updateCategory(Long categoryId, CategoryDTO categoryDTO);
 }

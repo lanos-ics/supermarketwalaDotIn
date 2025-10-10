@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.supermarketwala.dto.CategoryDTO;
+import com.example.supermarketwala.dto.CategoryResponse;
 import com.example.supermarketwala.exception.NotFoundException;
 import com.example.supermarketwala.model.Category;
 import com.example.supermarketwala.repo.CategoryRepository;
@@ -17,18 +20,50 @@ public class CategoryServiceImplementation implements CategoryService {
 	@Autowired
 	private CategoryRepository categoryRepository;
 	
+	@Autowired
+	private ModelMapper modelMapper;
+	
 	@Override
-	public List<Category> getCategories() {
+	public CategoryResponse getCategories() {
 		// TODO Auto-generated method stub
-		return categoryRepository.findAll();
+		
+		List<Category> categories = categoryRepository.findAll();
+		
+		List<CategoryDTO> convertedCategories = categories.stream()
+				.map(cat -> modelMapper.map(cat, CategoryDTO.class))
+				.toList();
+		
+		CategoryResponse categoryResponse = new CategoryResponse();
+		categoryResponse.setContent(convertedCategories);
+		
+		
+		return categoryResponse;
 	}
 
 	@Override
-	public Category addCategory(Category category) {
+	public CategoryDTO addCategory(CategoryDTO categoryDTO) {
 		// TODO Auto-generated method stub
 		
+		// sabse pahle dto ko category mai convert karna hai. 
+		Category category = modelMapper.map(categoryDTO, Category.class);
+		
+		
+		// fir category ko use karke database mai add krne ka logic likhna hai. 
+		
 		categoryRepository.save(category);
-		return category;
+		
+		// bapas se category ko DTO mai conver krke rakhna hai 
+		
+		CategoryDTO categoryResponseDTO  = modelMapper.map(category, CategoryDTO.class);
+		
+		// category DTO ko return karna hai.
+		
+		return categoryResponseDTO;
+		
+		
+		
+		
+		
 	}
 
 	@Override

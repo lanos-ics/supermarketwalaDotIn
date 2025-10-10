@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.supermarketwala.dto.CategoryDTO;
+import com.example.supermarketwala.dto.CategoryResponse;
 import com.example.supermarketwala.model.Category;
 import com.example.supermarketwala.service.CategoryService;
 
@@ -28,9 +30,9 @@ public class CategoryController {
 	private CategoryService categoryService;
 	
 	@GetMapping("/categories")
-	 ResponseEntity<List<Category>> getCategories()
+	 ResponseEntity<CategoryResponse> getCategories()
 	{
-		List<Category> categories =  categoryService.getCategories();
+		CategoryResponse categories =  categoryService.getCategories();
 		return ResponseEntity.ok().body(categories);
 	}
 	
@@ -45,9 +47,9 @@ public class CategoryController {
 	
 	
 	@PostMapping("/categories")
-	ResponseEntity<Category> addCategory(@RequestBody Category category)
+	ResponseEntity<CategoryDTO> addCategory(@RequestBody CategoryDTO categoryDTO)
 	{
-		Category categoryAdded = categoryService.addCategory(category);
+		CategoryDTO categoryAdded = categoryService.addCategory(categoryDTO);
 		return ResponseEntity.accepted().body(categoryAdded);
 		
 	}

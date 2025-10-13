@@ -6,6 +6,9 @@ import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.example.supermarketwala.dto.CategoryDTO;
@@ -24,18 +27,21 @@ public class CategoryServiceImplementation implements CategoryService {
 	private ModelMapper modelMapper;
 	
 	@Override
-	public CategoryResponse getCategories() {
+	public CategoryResponse getCategories(int pageNumber, int size) {
 		// TODO Auto-generated method stub
 		
-		List<Category> categories = categoryRepository.findAll();
+		Pageable pageRequest = PageRequest.of(pageNumber, size);
+		Page<Category> categories = categoryRepository.findAll(pageRequest);
 		
 		List<CategoryDTO> convertedCategories = categories.stream()
 				.map(cat -> modelMapper.map(cat, CategoryDTO.class))
 				.toList();
 		
 		CategoryResponse categoryResponse = new CategoryResponse();
-		categoryResponse.setContent(convertedCategories);
 		
+		categoryResponse.setContent(convertedCategories);
+		categoryResponse.setTotalElement(categories.getTotalElements());
+		categoryResponse.setTotalPages(categories.getTotalPages());
 		
 		return categoryResponse;
 	}
@@ -73,42 +79,54 @@ public class CategoryServiceImplementation implements CategoryService {
 		return category.orElseThrow(() -> new NotFoundException("Category not found."));
 	}
 
+//	@Override
+//	public Category updateCategory(Long categoryId, Category category) {
+//		// TODO Auto-generated method stub
+//		
+//		Optional<Category> existingCategory =  categoryRepository.findById(categoryId);
+//		
+//		if(existingCategory.isPresent())
+//		{
+//			Cate gory c = existingCategory.get();
+//			c.setCategoryName(category.getCategoryName());
+//			categoryRepository.save(c);
+//			return c;
+//		}else
+//		{
+//			throw new NotFoundException("category not found");
+//		}
+//		
+//		
+//	}
+//
+//	@Override
+//	public Category deleteCategory(Long categoryId) {
+//		Optional<Category> existingCategory =  categoryRepository.findById(categoryId);
+//		
+//		if(existingCategory.isPresent())
+//		{
+//			Category c = existingCategory.get();
+//			
+//			categoryRepository.delete(c);
+//			return c;
+//		}
+//		else
+//		{
+//			throw new NotFoundException("category not found");
+//		}
+//		
+//	}
+
 	@Override
-	public Category updateCategory(Long categoryId, Category category) {
+	public CategoryDTO updateCategory(Long categoryId, CategoryDTO categoryDTO) {
 		// TODO Auto-generated method stub
-		
-		Optional<Category> existingCategory =  categoryRepository.findById(categoryId);
-		
-		if(existingCategory.isPresent())
-		{
-			Category c = existingCategory.get();
-			c.setCategoryName(category.getCategoryName());
-			categoryRepository.save(c);
-			return c;
-		}else
-		{
-			throw new NotFoundException("category not found");
-		}
-		
-		
+		return null;
 	}
 
 	@Override
-	public Category deleteCategory(Long categoryId) {
-		Optional<Category> existingCategory =  categoryRepository.findById(categoryId);
-		
-		if(existingCategory.isPresent())
-		{
-			Category c = existingCategory.get();
-			
-			categoryRepository.delete(c);
-			return c;
-		}
-		else
-		{
-			throw new NotFoundException("category not found");
-		}
-		
+	public CategoryDTO deleteCategory(Long categoryId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 //	@Override

@@ -12,7 +12,7 @@ public interface CategoryService {
 
 	// get category 
 	
-	public CategoryResponse getCategories();
+	public CategoryResponse getCategories(int pageNumber, int size);
 	
 	public Category getCategory(Long categoryId);
 	 

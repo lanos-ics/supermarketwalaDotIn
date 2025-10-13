@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.supermarketwala.dto.CategoryDTO;
@@ -30,9 +31,12 @@ public class CategoryController {
 	private CategoryService categoryService;
 	
 	@GetMapping("/categories")
-	 ResponseEntity<CategoryResponse> getCategories()
+	 ResponseEntity<CategoryResponse> getCategories(
+			 	@RequestParam(name = "pn", defaultValue = "0") int pageNumber, 
+			 	@RequestParam(name ="s", defaultValue = "10") int size
+			 )
 	{
-		CategoryResponse categories =  categoryService.getCategories();
+		CategoryResponse categories =  categoryService.getCategories(pageNumber, size);
 		return ResponseEntity.ok().body(categories);
 	}
 	
@@ -54,22 +58,22 @@ public class CategoryController {
 		
 	}
 	
-	@DeleteMapping("/categories/d/{catId}")
-	ResponseEntity<Category> removeCategory(@PathVariable("catId") Long categoryId)
-	{
-		
-		Category deletedCategory = categoryService.deleteCategory(categoryId);
-		return ResponseEntity.ok().body(deletedCategory);
-	}
-	
-	@PutMapping("/categories/u/{categoryId}")
-	ResponseEntity<Category> updateCategory(@PathVariable("categoryId") Long categoryId, @RequestBody Category category)
-	{
-		Category updatedCategory = categoryService.updateCategory(categoryId, category);
-		return ResponseEntity.ok().body(updatedCategory);
-	}
-	
-	
+//	@DeleteMapping("/categories/d/{catId}")
+//	ResponseEntity<Category> removeCategory(@PathVariable("catId") Long categoryId)
+//	{
+//		
+//		Category deletedCategory = categoryService.deleteCategory(categoryId);
+//		return ResponseEntity.ok().body(deletedCategory);
+//	}
+//	
+//	@PutMapping("/categories/u/{categoryId}")
+//	ResponseEntity<Category> updateCategory(@PathVariable("categoryId") Long categoryId, @RequestBody Category category)
+//	{
+//		Category updatedCategory = categoryService.updateCategory(categoryId, category);
+//		return ResponseEntity.ok().body(updatedCategory);
+//	}
+//	
+//	
 	
 	
 }

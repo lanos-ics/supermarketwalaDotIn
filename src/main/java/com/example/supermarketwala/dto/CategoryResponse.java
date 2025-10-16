@@ -7,6 +7,10 @@ public class CategoryResponse {
 	private List<CategoryDTO> content;
 	private Long totalElement; 
 	private int totalPages;
+	private int size;
+	private int number; 
+	private int totalNumberOfElements;
+	private boolean islastPage;
 
 	public List<CategoryDTO> getContent() {
 		return content;
@@ -30,6 +34,38 @@ public class CategoryResponse {
 
 	public void setTotalPages(int totalPages) {
 		this.totalPages = totalPages;
+	}
+
+	public int getSize() {
+		return size;
+	}
+
+	public void setSize(int size) {
+		this.size = size;
+	}
+
+	public int getNumber() {
+		return number;
+	}
+
+	public void setNumber(int number) {
+		this.number = number;
+	}
+
+	public int getTotalNumberOfElements() {
+		return totalNumberOfElements;
+	}
+
+	public void setTotalNumberOfElements(int totalNumberOfElements) {
+		this.totalNumberOfElements = totalNumberOfElements;
+	}
+
+	public boolean isIslastPage() {
+		return islastPage;
+	}
+
+	public void setIslastPage(boolean islastPage) {
+		this.islastPage = islastPage;
 	}
 	
 	

@@ -32,7 +32,7 @@ public class CategoryServiceImplementation implements CategoryService {
 		
 		Pageable pageRequest = PageRequest.of(pageNumber, size);
 		Page<Category> categories = categoryRepository.findAll(pageRequest);
-		
+//		categories.get
 		List<CategoryDTO> convertedCategories = categories.stream()
 				.map(cat -> modelMapper.map(cat, CategoryDTO.class))
 				.toList();
@@ -42,7 +42,10 @@ public class CategoryServiceImplementation implements CategoryService {
 		categoryResponse.setContent(convertedCategories);
 		categoryResponse.setTotalElement(categories.getTotalElements());
 		categoryResponse.setTotalPages(categories.getTotalPages());
-		
+		categoryResponse.setNumber(categories.getNumber());
+		categoryResponse.setSize(categories.getSize());
+		categoryResponse.setTotalNumberOfElements(categories.getNumberOfElements());
+		categoryResponse.setIslastPage(categories.isLast());
 		return categoryResponse;
 	}
 

@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -20,11 +21,14 @@ public class SecurityConfig {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 	
 		http.authorizeHttpRequests(authorize -> authorize
-				.requestMatchers("/","/api/**")
+				.requestMatchers("/api/v1/public/**")
 				.permitAll()
 				.anyRequest()
 				.authenticated())
-		.httpBasic(httpbasic -> {})
+		.httpBasic(httpbasic -> {}).sessionManagement(session -> session
+				.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+				.maximumSessions(1)
+				.maxSessionsPreventsLogin(true))
 		.csrf(csrf -> csrf.disable());
 		
 		return http.build();

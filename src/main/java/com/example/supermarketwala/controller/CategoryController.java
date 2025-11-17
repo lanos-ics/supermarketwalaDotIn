@@ -22,6 +22,8 @@ import com.example.supermarketwala.dto.CategoryResponse;
 import com.example.supermarketwala.model.Category;
 import com.example.supermarketwala.service.CategoryService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("api/v1")
 public class CategoryController {
@@ -51,7 +53,7 @@ public class CategoryController {
 	
 	
 	@PostMapping("/categories")
-	ResponseEntity<CategoryDTO> addCategory(@RequestBody CategoryDTO categoryDTO)
+	ResponseEntity<CategoryDTO> addCategory(@Valid @RequestBody CategoryDTO categoryDTO)
 	{
 		CategoryDTO categoryAdded = categoryService.addCategory(categoryDTO);
 		return ResponseEntity.accepted().body(categoryAdded);
@@ -72,8 +74,6 @@ public class CategoryController {
 //		Category updatedCategory = categoryService.updateCategory(categoryId, category);
 //		return ResponseEntity.ok().body(updatedCategory);
 //	}
-//	
-//	
-	
-	
+		
 }
+

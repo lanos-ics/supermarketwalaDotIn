@@ -617,3 +617,12 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: /Users/pavankaro
 	at org.h2.mvstore.SingleFileStore.open(SingleFileStore.java:81)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:286)
 	... 57 more
+2025-11-14 08:56:47.060609+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "CATEGORY_NAME CHARACTER VARYING(20)": "'Traditional Indian Sweets' (25)"; SQL statement:
+INSERT INTO "PUBLIC"."CATEGORY_COPY_3_0"("CATEGORY_ID", "CATEGORY_NAME") OVERRIDING SYSTEM VALUE SELECT "CATEGORY_ID", "CATEGORY_NAME" FROM "PUBLIC"."CATEGORY" [22001-232]
+2025-11-14 09:07:57.002197+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "CATEGORY_NAME CHARACTER VARYING(20)": "'Traditional Indian Sweets' (25)"; SQL statement:
+INSERT INTO "PUBLIC"."CATEGORY_COPY_3_0"("CATEGORY_ID", "CATEGORY_NAME", "EMAIL") OVERRIDING SYSTEM VALUE SELECT "CATEGORY_ID", "CATEGORY_NAME", "EMAIL" FROM "PUBLIC"."CATEGORY" [22001-232]
+2025-11-14 09:08:44.018935+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "CATEGORY_NAME CHARACTER VARYING(20)": "'Traditional Indian Sweets' (25)"; SQL statement:
+INSERT INTO "PUBLIC"."CATEGORY_COPY_3_0"("CATEGORY_ID", "CATEGORY_NAME", "EMAIL") OVERRIDING SYSTEM VALUE SELECT "CATEGORY_ID", "CATEGORY_NAME", "EMAIL" FROM "PUBLIC"."CATEGORY" [22001-232]
